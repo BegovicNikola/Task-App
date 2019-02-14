@@ -1,8 +1,12 @@
 {
-  "name": "reactapp",
+  "name": "reactTaskApp",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "bootstrap": "^4.2.1",
+    "jquery": "^3.3.1",
+    "npm": "^6.8.0",
+    "popper": "^1.0.1",
     "react": "^16.8.1",
     "react-dom": "^16.8.1",
     "react-scripts": "2.1.3"
