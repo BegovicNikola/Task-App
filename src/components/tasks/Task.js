@@ -23,7 +23,7 @@ class Task extends Component {
         return (
             <Consumer>
                 {value => {
-                    const {dispatch} = value;
+                    const {dispatch} = value
                     return(
                         <div className="card mt-3">
                             <div className="card-body">
