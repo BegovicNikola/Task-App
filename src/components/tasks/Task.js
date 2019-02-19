@@ -35,7 +35,7 @@ class Task extends Component {
                                     <span className="fa fa-times-circle" onClick={this.deleteTask.bind(this, task.id, dispatch)}></span>
                                 </div>
                                 {showField ? (
-                                    <p className="card-text">{task.description}</p>
+                                    <p className="card-text">{task.body}</p>
                                 ) : null}
                             </div>
                         </div>

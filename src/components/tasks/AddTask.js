@@ -6,7 +6,7 @@ import uuid from 'uuid'
 class AddTask extends Component {
   state = {
     title: "",
-    description: "",
+    body: "",
     error: {}
   }
 
@@ -17,19 +17,19 @@ class AddTask extends Component {
   submitTask = (dispatch, e) => {
     e.preventDefault()
     
-    if(this.state.title === '' && this.state.description === ''){
-      this.setState({error: {title: true, description: true}})
-    }else if(this.state.title === '' && this.state.description !== ''){
-      this.setState({error: {title: true, description: false}})
-    }else if(this.state.description === '' && this.state.title !== ''){
-      this.setState({error: {title: false, description: true}})
+    if(this.state.title === '' && this.state.body === ''){
+      this.setState({error: {title: true, body: true}})
+    }else if(this.state.title === '' && this.state.body !== ''){
+      this.setState({error: {title: true, body: false}})
+    }else if(this.state.body === '' && this.state.title !== ''){
+      this.setState({error: {title: false, body: true}})
     }else{
       this.setState({error: {}})
 
       const newTask = {
         id: uuid(),
         title: this.state.title,
-        description: this.state.description
+        body: this.state.body
       }
 
       dispatch({type: 'ADD_TASK', payload: newTask})
@@ -37,7 +37,7 @@ class AddTask extends Component {
       // Clear input fields
       this.setState({
         title: '',
-        description: ''
+        body: ''
       })
 
       this.props.history.push('/')          
@@ -68,17 +68,17 @@ class AddTask extends Component {
                     error={this.state.error}
                   />
                   <div className="form-group">
-                    <label htmlFor="description">Description</label>
+                    <label htmlFor="body">Description</label>
                     <textarea
-                      name="description"
-                      className={this.state.error.description ? "form-control is-invalid" : "form-control"}
+                      name="body"
+                      className={this.state.error.body ? "form-control is-invalid" : "form-control"}
                       rows="5"
                       placeholder="Description here..."
                       style={{ resize: "none" }}
-                      value={this.state.description}
+                      value={this.state.body}
                       onChange={this.trackChange}
                     />
-                    {this.state.error.description ? <span className="invalid-feedback">Description is required</span> : null}
+                    {this.state.error.body ? <span className="invalid-feedback">Description is required</span> : null}
                   </div>
                   <input type="submit" className="btn btn-dark btn-block" />
                 </form>
