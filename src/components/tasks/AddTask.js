@@ -39,8 +39,11 @@ class AddTask extends Component {
         title: '',
         description: ''
       })
-      
+
+      this.props.history.push('/')          
+
     }
+
   }
 
   render() {
