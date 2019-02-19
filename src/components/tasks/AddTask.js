@@ -15,7 +15,7 @@ class AddTask extends Component {
     this.setState({ [e.target.name]: e.target.value })
   }
 
-  submitTask = (dispatch, e) => {
+  submitTask = async (dispatch, e) => {
     e.preventDefault()
     
     if(this.state.title === '' && this.state.body === ''){
@@ -34,11 +34,9 @@ class AddTask extends Component {
       }
 
       // *** With remote api... not adding id properly used uuid() ***
-      axios.post('https://jsonplaceholder.typicode.com/posts', newTask)
-      .then(res =>
-        dispatch({type: 'ADD_TASK', payload: newTask})
-      )
-      // dispatch({type: 'ADD_TASK', payload: newTask})
+      await axios.post('https://jsonplaceholder.typicode.com/posts', newTask)
+      
+      dispatch({type: 'ADD_TASK', payload: newTask})
 
       // Clear input fields
       this.setState({
