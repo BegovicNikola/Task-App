@@ -13,7 +13,7 @@ const TaskInputGroup = props => {
         value={props.value}
         onChange={props.onChange}
       />
-      {props.error.title ? <span className="invalid-feedback">Title is required!</span> : null}
+      {props.error.title ? <span className="invalid-feedback">Title is required</span> : null}
     </div>
   );
 };
