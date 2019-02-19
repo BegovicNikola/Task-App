@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-
+import axios from 'axios'
 import {Consumer} from '../../context'
 
 class Task extends Component {
@@ -10,7 +10,10 @@ class Task extends Component {
     }
 
     deleteTask = (id, dispatch) => {
-        dispatch({type: 'DELETE_TASK', payload: id})
+        axios.delete(`https://jsonplaceholder.typicode.com/posts/${id}`)
+        .then(res => 
+            dispatch({type: 'DELETE_TASK', payload: id})
+        )
     }
 
     showFieldClick = () => {

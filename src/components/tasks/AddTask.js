@@ -1,6 +1,7 @@
 import React, { Component } from "react"
 import { Consumer } from "../../context"
 import TaskInputGroup from '../layout/TaskInputGroup'
+import axios from 'axios'
 import uuid from 'uuid'
 
 class AddTask extends Component {
@@ -32,7 +33,12 @@ class AddTask extends Component {
         body: this.state.body
       }
 
-      dispatch({type: 'ADD_TASK', payload: newTask})
+      // *** With remote api... not adding id properly used uuid() ***
+      axios.post('https://jsonplaceholder.typicode.com/posts', newTask)
+      .then(res =>
+        dispatch({type: 'ADD_TASK', payload: newTask})
+      )
+      // dispatch({type: 'ADD_TASK', payload: newTask})
 
       // Clear input fields
       this.setState({
