@@ -9,11 +9,10 @@ class Task extends Component {
         showField: false
     }
 
-    deleteTask = (id, dispatch) => {
-        axios.delete(`https://jsonplaceholder.typicode.com/posts/${id}`)
-        .then(res => 
-            dispatch({type: 'DELETE_TASK', payload: id})
-        )
+    deleteTask = async (id, dispatch) => {
+        await axios.delete(`https://jsonplaceholder.typicode.com/posts/${id}`)
+        
+        dispatch({type: 'DELETE_TASK', payload: id})
     }
 
     showFieldClick = () => {

@@ -28,9 +28,10 @@ export class Provider extends Component {
         }
     }  
 
-    componentDidMount(){
-        axios.get('https://jsonplaceholder.typicode.com/posts')
-        .then(res => this.setState({tasks: res.data}))
+    async componentDidMount(){
+        const res = await axios.get('https://jsonplaceholder.typicode.com/posts')
+        
+        this.setState({tasks: res.data})
     }
 
     render() {
