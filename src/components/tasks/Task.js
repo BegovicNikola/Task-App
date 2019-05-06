@@ -1,55 +1,58 @@
-import React, { Component } from 'react'
-import PropTypes from 'prop-types'
-import axios from 'axios'
-import {Consumer} from '../../context'
+import React, { Component } from "react";
+import PropTypes from "prop-types";
+import axios from "axios";
+import { Consumer } from "../../context";
 
 class Task extends Component {
+  state = {
+    showField: false
+  };
 
-    state = {
-        showField: false
-    }
+  deleteTask = async (id, dispatch) => {
+    await axios.delete(`https://jsonplaceholder.typicode.com/posts/${id}`);
 
-    deleteTask = async (id, dispatch) => {
-        await axios.delete(`https://jsonplaceholder.typicode.com/posts/${id}`)
-        
-        dispatch({type: 'DELETE_TASK', payload: id})
-    }
+    dispatch({ type: "DELETE_TASK", payload: id });
+  };
 
-    showFieldClick = () => {
-        this.setState({showField: !this.state.showField})
-    }
+  showFieldClick = () => {
+    this.setState({ showField: !this.state.showField });
+  };
 
-    render() {
-    const {task} = this.props
-    const {showField} = this.state
-        return (
-            <Consumer>
-                {value => {
-                    const {dispatch} = value
-                    return(
-                        <div className="card mt-3">
-                            <div className="card-body">
-                                <div className="d-flex align-items-center justify-content-between">
-                                    <div className="d-flex align-items-center">
-                                        <h3 className="card-title mb-0 mr-1">{task.title}</h3>
-                                        <span className="fa fa-chevron-circle-down" onClick={this.showFieldClick}></span>
-                                    </div>
-                                    <span className="fa fa-times-circle" onClick={this.deleteTask.bind(this, task.id, dispatch)}></span>
-                                </div>
-                                {showField ? (
-                                    <p className="card-text">{task.body}</p>
-                                ) : null}
-                            </div>
-                        </div>
-                    )
-                }}
-            </Consumer>
-        )
-    }
+  render() {
+    const { task } = this.props;
+    const { showField } = this.state;
+    return (
+      <Consumer>
+        {value => {
+          const { dispatch } = value;
+          return (
+            <div className="card mt-3">
+              <div className="card-body">
+                <div className="d-flex align-items-center justify-content-between">
+                  <div className="d-flex align-items-center">
+                    <h3 className="card-title mb-0 mr-1">{task.title}</h3>
+                    <span
+                      className="fa fa-chevron-circle-down"
+                      onClick={this.showFieldClick}
+                    />
+                  </div>
+                  <span
+                    className="fa fa-times-circle"
+                    onClick={this.deleteTask.bind(this, task.id, dispatch)}
+                  />
+                </div>
+                {showField ? <p className="card-text">{task.body}</p> : null}
+              </div>
+            </div>
+          );
+        }}
+      </Consumer>
+    );
+  }
 }
 
 Task.propTypes = {
-    task: PropTypes.object.isRequired
-}
+  task: PropTypes.object.isRequired
+};
 
-export default Task
+export default Task;
